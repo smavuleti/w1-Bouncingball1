@@ -1,0 +1,326 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <title>Registration Form</title>  
+    <script>
+    function error(error){
+        console.log(error.message);
+    }   
+        var dbObj = openDatabase('17081Database', 1.0, 'home work 3',  2 * 1024 * 1024);  
+        dbObj.transaction(function (tx) {  
+            tx.executeSql('CREATE TABLE IF NOT EXISTS REGISTRATION(first_name text,company text,last_name text,website text,email text, position text,password text,phone text,ps text,service1 text,service2 text,service3 text,service4 text,service5 text,service6 text,imp text,sub text)');  
+        },error);  
+  
+        function saveDetails() {  
+            var firstName,company,lName,website,email,position,password,phone,ps,imp,sub;
+
+            firstName = document.getElementById("first_name").value;
+            company = document.getElementById("company").varlue;
+            lName = document.getElementById("last_name").value;
+            website = document.getElementById("website").value;
+            email = document.getElementById("email").value;
+            position = document.getElementById("position").value;
+            password = document.getElementById("password").value;
+            phone = document.getElementById("phone").value;
+            ps = document.getElementById("ps").value;
+
+            if(document.getElementById("service1").checked== true)
+                var  s1 = document.getElementById("service1").value;
+            
+
+            if(document.getElementById("service2").checked== true)
+            var s2 = document.getElementById("service2").value;
+
+        if(document.getElementById("service3").checked== true)
+            var s3 = document.getElementById("service3").value;
+
+        if(document.getElementById("service4").checked== true)
+           var s4 = document.getElementById("service4").value;
+
+        if(document.getElementById("service5").checked== true)
+           var s5 = document.getElementById("service5").value;
+
+        if(document.getElementById("service6").checked== true)
+           var s6 = document.getElementById("service6").value;
+
+            imp = document.getElementById("imp").value;
+             sub = document.getElementById("sub").value;
+            
+
+            dbObj.transaction(function (tx) {  
+                tx.executeSql('insert into REGISTRATION(first_name,company,last_name,website,email,position,password,phone,ps,service1,service2,service3,service4,service5,service6,imp,sub) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[firstName,company,lName,website,email,position,password,phone,ps,s1,s2,s3,s4,s5,s6,imp,sub]);  
+            },error);  
+        }  
+        dbObj.transaction(function (tx) {  
+            tx.executeSql('SELECT * FROM REGISTRATION', [], function (tx, results) {  
+                var len = results.rows.length, i;  
+                var str = '';  
+                for (i = 0; i < len; i++) {  
+
+
+
+                    str += "<tr>";  
+                str += "<td>" + results.rows.item(i).first_name + "</td>";  
+                str += "<td>" + results.rows.item(i).company + "</td>";  
+                str += "<td>" + results.rows.item(i).last_name + "</td>";  
+                str += "<td>" + results.rows.item(i).website + "</td>"; 
+                str += "<td>" + results.rows.item(i).email + "</td>"; 
+                str += "<td>" + results.rows.item(i).position + "</td>"; 
+                str += "<td>" + results.rows.item(i).password + "</td>"; 
+                str += "<td>" + results.rows.item(i).phone + "</td>"; 
+                str += "<td>" + results.rows.item(i).ps + "</td>"; 
+                str += "<td>" + results.rows.item(i).service1 + "</td>"; 
+                str += "<td>" + results.rows.item(i).service2 + "</td>"; 
+                str += "<td>" + results.rows.item(i).service3 + "</td>"; 
+                str += "<td>" + results.rows.item(i).service4 + "</td>";
+                str += "<td>" + results.rows.item(i).service5 + "</td>";
+                str += "<td>" + results.rows.item(i).service6 + "</td>";
+                str += "<td>" + results.rows.item(i).imp + "</td>";
+                str += "<td>" + results.rows.item(i).sub + "</td>";
+
+                str += "</tr>";  
+
+                document.getElementById("display").innerHTML += str;  
+                str = '';  
+                }  
+            }, null);  
+        },error);  
+    </script>  
+</head>  
+<style type="text/css">
+body, label {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    color: white;
+}
+td.spacing{
+    border-spacing: 10px 19px;
+}
+
+#dropDown{
+width: 131px;
+}
+
+p{
+    font-size: 15px;
+}
+
+    form {
+        width: 437px;
+        background: linear-gradient(to right, black, grey, grey, black);
+        color: white;
+            }
+}
+fieldset{
+
+  padding:10px;
+  padding-bottom: 5px;
+  float:left;
+  font-family:Arial;
+}
+
+.save{
+    width: 105px;
+    color: black;
+    font-size: x-large;
+    font-weight: bolder;
+    background: linear-gradient(yellow, white, yellow);
+}
+</style>
+
+<body>
+<form>
+<fieldset style="border:none; height: 70px;">
+<p>
+<img src="Adobe-Reader.jpg" style="width:55px;  height: 55px;">
+ Please fill out this form below to begin downloading.</p>
+</fieldset>
+<fieldset style="border:none;  height: 160px;">
+<hr>
+<table width="415px">
+
+<tr> 
+    <td>
+        <label for="fn"> First Name: * </label>
+    </td> 
+    <td> 
+        <input type="text" id="first_name" required>
+    </td>
+    <td class="spacing">
+    </td>
+
+    <td> 
+        <label for="company"  > Company: * </label>
+    </td>
+    <td> 
+        <input type="text" id="company" required>
+    </td>
+</tr>
+
+<tr>
+    <td> 
+        <label for="last_name" > Last Name: * </label>
+    </td>
+    <td> <input type="text" id="last_name" required></td>
+
+    <td> </td>
+  <td>
+    <label for="website" > Website: * </label>
+    </td>
+    <td> <input type="url" id="website" required></td>
+
+
+</tr>
+   
+   <tr>
+    <td> 
+        <label for="email"> Email: * </label>
+    </td>
+    <td> <input type="email" id="email" required></td>
+
+    <td></td>
+
+<td> 
+        <label for="position" > Position: * </label>
+    </td>
+    <td>    <select class="dropDown" id="position" required>
+     <option  value="">--Select One</option>
+     <option value="softDev">Software Developer</option>
+     <option value="manager">Manager</option>
+     <option value="tester">Tester</option>
+    </select></td>
+
+    </tr>
+
+
+
+<tr>
+    <td> 
+        <label for="password"  > Password: * </label>
+    </td> 
+    <td> <input type="password" id="password" required></td>
+
+    <td> </td>
+
+     <td> 
+        <label for="phone" > Phone: * </label>
+    </td>
+    <td> <input type="text" id="phone" required></td>
+
+</tr>
+</table>
+<p> <sup>*</sup>Setting a password will allow you to log back in and see out documents any time.</p>
+</fieldset>
+
+
+<fieldset style="border:none;">
+<hr>
+    PRIMARY service or product of interest: * <br><br>
+    <select id="ps" required>
+     <option value="">--Select One</option>
+     <option value="softDev">Software Developer</option>
+     <option value="manager">Manager</option>
+     <option value="tester">Tester</option>
+    </select>
+<br><br>
+
+OTHER services or product of interest: 
+ <br><br>
+    <input type="checkbox" id="service1" name="service1" value="onlineStrategy"> Online Strategy<br>
+    <input type="checkbox" id="service2" name="service2" value="webdesign"> Web Design and Development<br>
+    <input type="checkbox" id="service3" name="service3" value="socialNetworking"> Social Networking and Online Community<br>
+    <input type="checkbox" id="service4" name="service4" value="onlineCampaigns"> Integrated Online Campaigns<br>
+    <input type="checkbox" id="service5" name="service5" value="emailMarketingServices"> Email Marketing Services (Strategy, Design, Development)<br>
+    <input type="checkbox" id="service6" name="service6" value="emailMarketingSoftware"> Email Marketing Software<br><br>
+</fieldset>
+
+<fieldset style="border:none;"><hr>
+   
+ When are you looking to implement a solution? * <br><br>
+    <select id="imp">
+     <option value="">--Select One</option>
+     <option value="3mnths">Less than 3 months</option>
+     <option value="6mnthn">After 6 months</option>
+    </select>
+
+</fieldset>
+
+<fieldset style="border:none;">
+   <hr>
+    Yes! Subscribe to email Marketing 
+
+<br><br>
+<input checked type="checkbox" id="sub" name="subscription" value="Yes"> Receive feature and best practice articles on email marketing, interactive design and online strategy.
+</fieldset>
+
+<fieldset style="border:none; padding:10px;">
+<input id="save"class="save" type ="submit" value="Save" onclick="saveDetails();">
+</fieldset>
+</form>
+
+
+
+
+
+<table id="display" name="display" cellpadding="10px" cellspacing="0" border="1" style="background-color:black;color:white;font-size:15px;">  
+        <tr style="background-color:black;color:white;font-size:15px;">  
+            <td>  
+                FirstName :
+            </td>  
+            <td>  
+                Last Name:  
+            </td>  
+            <td>  
+                Company:  
+            </td> 
+            <td>
+                Website:
+            </td>
+            <td>
+                Email
+            </td> 
+            <td>
+                Position:
+            </td>
+            <td>
+            Password:
+            </td>
+            <td>
+            Phone Number:
+            </td>
+            <td>
+            Primary Service:
+            </td>
+
+            <td>
+s1:
+            </td>
+            <td>
+            s2:
+            </td>
+            <td>
+            s3:
+            </td>
+            <td>
+            s4:
+            </td>
+            <td>
+            s5:
+            </td>
+            <td>
+            s6:
+            </td>
+Implementation:
+            <td>
+            subscriptionL
+            </td>
+            
+        </tr>  
+    </table>  
+
+        
+
+
+
+</body>
+</html>
